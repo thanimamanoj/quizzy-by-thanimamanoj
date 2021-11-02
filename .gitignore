@@ -117,3 +117,10 @@ cypress-tests/cypress/videos/
 /test/reports
 cypress-tests/debug.log
 coverage
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
