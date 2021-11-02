@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   private
 
-  def to_lowercase
-    email.downcase!
-  end
+    def to_lowercase
+      email.downcase!
+    end
 end
