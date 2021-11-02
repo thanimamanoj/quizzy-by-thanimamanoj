@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(first_name: "Sam",
-                     last_name: "Smith",
-                     email: "sam@example.com")
+    @user = User.new(
+      first_name: "Sam",
+      last_name: "Smith",
+      email: "sam@example.com")
   end
 
   def test_user_should_be_valid
@@ -14,7 +15,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_user_should_not_be_valid_and_saved_without_first_name
-    @user.first_name = ''
+    @user.first_name = ""
     assert_not @user.valid?
     assert_includes @user.errors.full_messages, "First name can't be blank"
   end
@@ -25,7 +26,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_user_should_not_be_valid_and_saved_without_last_name
-    @user.last_name = ''
+    @user.last_name = ""
     assert_not @user.valid?
     assert_includes @user.errors.full_messages, "Last name can't be blank"
   end
