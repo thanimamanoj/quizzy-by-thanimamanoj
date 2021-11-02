@@ -79,4 +79,9 @@ class UserTest < ActiveSupport::TestCase
     @user.save!
     assert_equal uppercase_email.downcase, @user.email
   end
+
+  def test_user_should_have_a_valid_role
+    @user.role = "standard"
+    assert @user.valid?
+  end
 end
