@@ -116,3 +116,4 @@ cypress-tests/cypress/videos/
 # Ignore test report folder
 /test/reports
 cypress-tests/debug.log
+coverage
