@@ -7,7 +7,9 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new(
       first_name: "Sam",
       last_name: "Smith",
-      email: "sam@example.com")
+      email: "sam@example.com",
+      password: "welcome",
+      password_confirmation: "welcome")
   end
 
   def test_user_should_be_valid
@@ -21,7 +23,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_first_name_should_be_of_valid_length
-    @user.first_name = "a" * 350
+    @user.first_name = "a" * 60
     assert @user.invalid?
   end
 
@@ -32,7 +34,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_last_name_should_be_of_valid_length
-    @user.last_name = "a" * 350
+    @user.last_name = "a" * 60
     assert @user.invalid?
   end
 
@@ -83,5 +85,28 @@ class UserTest < ActiveSupport::TestCase
   def test_user_should_have_a_valid_role
     @user.role = "standard"
     assert @user.valid?
+  end
+
+  def test_user_should_not_be_saved_without_password
+    @user.password = nil
+    assert_not @user.save
+    assert_includes @user.errors.full_messages, "Password can't be blank"
+  end
+
+  def test_user_should_not_be_saved_without_password_confirmation
+    @user.password_confirmation = nil
+    assert_not @user.save
+    assert_includes @user.errors.full_messages, "Password confirmation can't be blank"
+  end
+
+  def test_password_should_have_minimum_length
+    @user.password = @user.password_confirmation = "a" * 4
+    assert @user.invalid?
+  end
+
+  def test_user_should_have_matching_password_and_password_confirmation
+    @user.password_confirmation = "#{@user.password}-random"
+    assert_not @user.save
+    assert_includes @user.errors.full_messages, "Password confirmation doesn't match Password"
   end
 end

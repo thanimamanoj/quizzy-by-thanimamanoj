@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_secure_password
+
   enum role: { standard: 0, administrator: 1 }
 
   validates :first_name, presence: true, length: { maximum: Constants::MAX_TASK_FIRST_NAME_LENGTH }
   validates :last_name, presence: true, length: { maximum: Constants::MAX_TASK_LAST_NAME_LENGTH }
   validates :email, presence: true, uniqueness: true, format: { with: Constants::VALID_EMAIL_REGEX }
-
+  validates :password, length: { minimum: 6 }, if: -> { password.present? }
+  validates :password_confirmation, presence: true, on: :create
   before_save :to_lowercase
 
   private
