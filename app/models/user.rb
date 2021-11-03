@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_secure_password
+
   enum role: { standard: 0, administrator: 1 }
 
   validates :first_name, presence: true, length: { maximum: Constants::MAX_TASK_FIRST_NAME_LENGTH }
