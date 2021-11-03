@@ -8,7 +8,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { maximum: Constants::MAX_TASK_FIRST_NAME_LENGTH }
   validates :last_name, presence: true, length: { maximum: Constants::MAX_TASK_LAST_NAME_LENGTH }
   validates :email, presence: true, uniqueness: true, format: { with: Constants::VALID_EMAIL_REGEX }
-
+  validates :password, length: { minimum: 6 }, if: -> { password.present? }
+  validates :password_confirmation, presence: true, on: :create
   before_save :to_lowercase
 
   private
