@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_secure_password
+  has_secure_token :authentication_token
 
   enum role: { standard: 0, administrator: 1 }
 
