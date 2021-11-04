@@ -8,7 +8,8 @@ ruby "3.0.2"
 gem "rails", "~> 6.1.4", ">= 6.1.4.1"
 
 # database
-gem "sqlite3", "~> 1.4"
+gem "pg", group: [:production]
+gem "sqlite3", "~> 1.4", group: [:development, :test]
 
 # Application server
 gem "puma", "~> 5.0"
