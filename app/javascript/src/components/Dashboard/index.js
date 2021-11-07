@@ -1,6 +1,5 @@
 import React from "react";
 
-//import Button from "components/Button";
 import Container from "components/Container";
 
 import NavItem from "../NavBar/NavItem";
@@ -15,7 +14,7 @@ const Dashboard = () => {
           path="/quizzes/create"
         />
       </div>
-      <h1 className="my-5 text-xl leading-5 text-center">
+      <h1 className="my-5 text-xl leading-5 text-center text-gray-600">
         You have not created any quiz.
       </h1>
     </Container>

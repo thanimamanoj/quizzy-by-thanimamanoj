@@ -4,7 +4,6 @@ import quizzesApi from "apis/quizzes";
 import Container from "components/Container";
 
 import QuizForm from "./Form/QuizForm";
-//import usersApi from "apis/users";
 
 const CreateQuiz = ({ history }) => {
   const [name, setName] = useState("");
