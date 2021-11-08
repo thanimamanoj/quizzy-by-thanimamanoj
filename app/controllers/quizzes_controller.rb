@@ -3,6 +3,11 @@
 class QuizzesController < ApplicationController
   before_action :authenticate_user_using_x_auth_token, except: [:new, :edit]
 
+  def index
+    quizzes = Quiz.where(user_id: current_user.id)
+    render status: :ok, json: { quizzes: quizzes }
+  end
+
   def create
     @quiz = Quiz.new(quiz_params.merge(user: current_user))
     if @quiz.save
