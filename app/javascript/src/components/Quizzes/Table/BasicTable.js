@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 
+import { useHistory } from "react-router-dom";
 import { useTable } from "react-table";
 
 import { COLUMNS } from "./columns";
@@ -7,7 +8,7 @@ import { COLUMNS } from "./columns";
 const BasicTable = ({ tdata }) => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => tdata, []);
-
+  let history = useHistory();
   const tableInstance = useTable({
     columns,
     data,
@@ -51,14 +52,26 @@ const BasicTable = ({ tdata }) => {
                     <tr key={index} {...row.getRowProps()}>
                       {row.cells.map((cell, i) => {
                         return (
-                          <td
-                            key={i}
-                            className="block w-64 px-6 py-4 text-sm font-medium
+                          <>
+                            <td
+                              key={i}
+                              className="block w-64 px-6 py-4 text-sm font-medium
             leading-8 text-bb-purple capitalize truncate"
-                            {...cell.getCellProps()}
-                          >
-                            {cell.render("Cell")}
-                          </td>
+                              {...cell.getCellProps()}
+                            >
+                              {cell.render("Cell")}
+                            </td>
+                            <td className="px-6 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
+                              <i
+                                className="text-2xl text-center transition cursor-pointer duration-300ease-in-out ri-edit-line hover:text-bb-yellow"
+                                onClick={() => {
+                                  history.push(
+                                    `/quizzes/${row.original.id}/edit`
+                                  );
+                                }}
+                              ></i>
+                            </td>
+                          </>
                         );
                       })}
                     </tr>
