@@ -9,14 +9,7 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => tdata, []);
   let history = useHistory();
-  // const destroyQuiz = async id => {
-  //   try {
-  //     await quizzesApi.destroy(id);
-  //     await fetchQuizzes();
-  //   } catch (error) {
-  //     logger.error(error);
-  //   }
-  // };
+
   const tableInstance = useTable({
     columns,
     data,
@@ -25,6 +18,7 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
   const handleDelete = id => {
     if (confirm("Are you sure you want to delete")) {
       destroyQuiz(id);
+      history.push("/");
     }
   };
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
