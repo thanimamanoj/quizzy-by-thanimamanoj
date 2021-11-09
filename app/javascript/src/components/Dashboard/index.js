@@ -24,6 +24,15 @@ const Dashboard = () => {
     }
   };
 
+  const destroyQuiz = async id => {
+    try {
+      await quizzesApi.destroy(id);
+      await fetchQuizzes();
+    } catch (error) {
+      logger.error(error);
+    }
+  };
+
   useEffect(() => {
     fetchQuizzes();
   }, []);
@@ -63,7 +72,7 @@ const Dashboard = () => {
         />
       </div>
       <h1 className="mt-6 text-4xl">List of quizzes</h1>
-      <BasicTable tdata={quizzes} />
+      <BasicTable tdata={quizzes} destroyQuiz={destroyQuiz} />
     </Container>
   );
 };

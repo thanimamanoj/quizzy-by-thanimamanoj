@@ -2,7 +2,7 @@
 
 class QuizzesController < ApplicationController
   before_action :authenticate_user_using_x_auth_token, except: [:new, :edit]
-  before_action :load_quiz, only: [:show, :update]
+  before_action :load_quiz, only: %i[show update destroy]
 
   def index
     quizzes = Quiz.where(user_id: current_user.id)
@@ -26,6 +26,15 @@ class QuizzesController < ApplicationController
   def update
     if @quiz.update(quiz_params)
       render status: :ok, json: { notice: "Successfully updated quiz." }
+    else
+      render status: :unprocessable_entity,
+        json: { error: @quiz.errors.full_messages.to_sentence }
+    end
+  end
+
+  def destroy
+    if @quiz.destroy
+      render status: :ok, json: { notice: "Successfully deleted quiz." }
     else
       render status: :unprocessable_entity,
         json: { error: @quiz.errors.full_messages.to_sentence }

@@ -5,15 +5,28 @@ import { useTable } from "react-table";
 
 import { COLUMNS } from "./columns";
 
-const BasicTable = ({ tdata }) => {
+const BasicTable = ({ tdata, destroyQuiz }) => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => tdata, []);
   let history = useHistory();
+  // const destroyQuiz = async id => {
+  //   try {
+  //     await quizzesApi.destroy(id);
+  //     await fetchQuizzes();
+  //   } catch (error) {
+  //     logger.error(error);
+  //   }
+  // };
   const tableInstance = useTable({
     columns,
     data,
   });
 
+  const handleDelete = id => {
+    if (confirm("Are you sure you want to delete")) {
+      destroyQuiz(id);
+    }
+  };
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;
   return (
@@ -55,21 +68,32 @@ const BasicTable = ({ tdata }) => {
                           <>
                             <td
                               key={i}
-                              className="block w-64 px-6 py-4 text-sm font-medium
-            leading-8 text-bb-purple capitalize truncate"
+                              className="block w-64 px-6 py-4 text-xl font-medium
+                              leading-8 text-bb-purple capitalize truncate"
                               {...cell.getCellProps()}
                             >
                               {cell.render("Cell")}
                             </td>
                             <td className="px-6 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
-                              <i
-                                className="text-2xl text-center transition cursor-pointer duration-300ease-in-out ri-edit-line hover:text-bb-yellow"
+                              <a
+                                className="text-2xl text-center transition cursor-pointer duration-300ease-in-out ri-pencil-fill hover:text-bb-yellow"
                                 onClick={() => {
                                   history.push(
                                     `/quizzes/${row.original.id}/edit`
                                   );
                                 }}
-                              ></i>
+                              >
+                                Edit
+                              </a>
+                            </td>
+                            <td className="px-6 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
+                              <a
+                                className="text-red-500
+                              hover:text-red-700 ri-delete-bin-line text-2xl text-center transition cursor-pointer duration-300ease-in-out"
+                                onClick={() => handleDelete(row.original.id)} //destroyQuiz(row.original.id)
+                              >
+                                Delete
+                              </a>
                             </td>
                           </>
                         );
