@@ -60,14 +60,26 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
                             <td
                               key={i}
                               className="block w-64 px-6 py-4 text-xl font-medium
-                              leading-8 text-bb-purple capitalize truncate"
+                              leading-8 text-bb-purple truncate"
                               {...cell.getCellProps()}
                             >
                               <Typography style="h4">
                                 {cell.render("Cell")}
                               </Typography>
                             </td>
-                            <td className="px-6 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
+                            <td className="px-4 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
+                              <Button
+                                label="Show"
+                                onClick={() => {
+                                  history.push(
+                                    `/quizzes/${row.original.id}/show`
+                                  );
+                                }}
+                                style="secondary"
+                                size="large"
+                              />
+                            </td>
+                            <td className="px-4 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
                               <Button
                                 label="Edit"
                                 onClick={() => {
@@ -81,7 +93,7 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
                                 size="large"
                               />
                             </td>
-                            <td className="px-6 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
+                            <td className="px-4 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
                               <Button
                                 label="Delete"
                                 onClick={() => {

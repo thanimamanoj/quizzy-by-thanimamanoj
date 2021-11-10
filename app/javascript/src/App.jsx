@@ -12,6 +12,7 @@ import Dashboard from "components/Dashboard";
 import PageLoader from "components/PageLoader";
 import CreateQuiz from "components/Quizzes/CreateQuiz";
 import EditQuiz from "components/Quizzes/EditQuiz";
+import ShowQuiz from "components/Quizzes/ShowQuiz";
 import { getFromLocalStorage } from "helpers/storage";
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
         {/* <Route exact path="/" component={Dashboard} /> */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/quizzes/create" component={CreateQuiz} />
+        <Route exact path="/quizzes/:id/show" component={ShowQuiz} />
         <Route exact path="/quizzes/:id/edit" component={EditQuiz} />
         <PrivateRoute
           path="/"
