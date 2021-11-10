@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_many :quizzes
-
+  has_many :quizzes, dependent: :destroy
+  has_many :questions, dependent: :destroy
   has_secure_password
   has_secure_token :authentication_token
 
