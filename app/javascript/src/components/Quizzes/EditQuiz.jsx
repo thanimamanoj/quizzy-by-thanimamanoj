@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
+import { PageLoader } from "@bigbinary/neetoui/v2";
 import { useParams } from "react-router-dom";
 
 import quizzesApi from "apis/quizzes";
 import Container from "components/Container";
-import PageLoader from "components/PageLoader";
 
 import QuizForm from "./Form/QuizForm";
 

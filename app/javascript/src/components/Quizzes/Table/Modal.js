@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Link, useHistory } from "react-router-dom";
+import { Button } from "@bigbinary/neetoui/v2";
+import { useHistory } from "react-router-dom";
 
 function Modal({ setOpen, id, destroyQuiz }) {
   let history = useHistory();
@@ -26,20 +27,17 @@ function Modal({ setOpen, id, destroyQuiz }) {
           </div>
           <hr />
           <div className="ml-auto">
-            <Link to={"/"}>
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={() => handleDelete(id)}
-              >
-                Agree
-              </button>
-            </Link>
-            <button
+            <Button
+              label="Continue"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => handleDelete(id)}
+            />
+            <Button
+              style="text"
+              label="Cancel"
               className="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
               onClick={() => setOpen(false)}
-            >
-              Close
-            </button>
+            />
           </div>
         </div>
       </div>

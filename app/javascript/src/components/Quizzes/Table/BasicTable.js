@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 
+import { Button, Typography } from "@bigbinary/neetoui/v2";
 import { useHistory } from "react-router-dom";
 import { useTable } from "react-table";
 
@@ -35,14 +36,13 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
                     {headerGroup.headers.map((column, i) => (
                       <th
                         key={i}
-                        className="px-6 py-3 text-xs font-bold leading-4 tracking-wider
-        text-left text-bb-gray-600 text-opacity-50 uppercase bg-gray-50"
+                        className="px-6 py-3 text-s font-bold leading-4 tracking-wider
+        text-left text-bb-black text-opacity-50 uppercase bg-gray-50"
                         {...column.getHeaderProps()}
                       >
                         {column.render("Header")}
                       </th>
                     ))}
-                    {/* <th className="px-6 py-3 bg-gray-50"></th> */}
                   </tr>
                 ))}
               </thead>
@@ -63,31 +63,36 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
                               leading-8 text-bb-purple capitalize truncate"
                               {...cell.getCellProps()}
                             >
-                              {cell.render("Cell")}
+                              <Typography style="h4">
+                                {cell.render("Cell")}
+                              </Typography>
                             </td>
                             <td className="px-6 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
-                              <a
-                                className="text-2xl text-center transition cursor-pointer duration-300ease-in-out ri-pencil-fill hover:text-bb-yellow"
+                              <Button
+                                label="Edit"
                                 onClick={() => {
                                   history.push(
                                     `/quizzes/${row.original.id}/edit`
                                   );
                                 }}
-                              >
-                                Edit
-                              </a>
+                                style="secondary"
+                                icon={"ri-pencil-fill"}
+                                iconPosition="left"
+                                size="large"
+                              />
                             </td>
                             <td className="px-6 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
-                              <a
-                                className="text-red-500
-                              hover:text-red-700 ri-delete-bin-line text-2xl text-center transition cursor-pointer duration-300ease-in-out"
+                              <Button
+                                label="Delete"
                                 onClick={() => {
                                   setOpen(true);
                                   setId(row.original.id);
-                                }} //handleDelete(row.original.id)} //destroyQuiz(row.original.id)
-                              >
-                                Delete
-                              </a>
+                                }}
+                                style="danger"
+                                icon="ri-delete-bin-line"
+                                iconPosition="left"
+                                size="large"
+                              />
                               {open ? (
                                 <Modal
                                   setOpen={setOpen}
