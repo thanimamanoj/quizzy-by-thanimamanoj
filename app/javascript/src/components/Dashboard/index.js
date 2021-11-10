@@ -45,23 +45,6 @@ const Dashboard = () => {
     );
   }
 
-  if (either(isNil, isEmpty)(quizzes)) {
-    return (
-      <Container>
-        <div className="flex items-center justify-end gap-x-4">
-          <NavItem
-            name="Add new quiz"
-            iconClass="ri-add-fill"
-            path="/quizzes/create"
-          />
-        </div>
-        <h1 className="my-5 text-xl leading-5 text-center text-gray-600">
-          You have not created any quiz.
-        </h1>
-      </Container>
-    );
-  }
-
   return (
     <Container>
       <div className="flex items-center justify-end gap-x-4">
@@ -71,8 +54,16 @@ const Dashboard = () => {
           path="/quizzes/create"
         />
       </div>
-      <h1 className="mt-6 text-4xl">List of quizzes</h1>
-      <BasicTable tdata={quizzes} destroyQuiz={destroyQuiz} />
+      {either(isNil, isEmpty)(quizzes) ? (
+        <h1 className="my-5 text-xl leading-5 text-center text-gray-600">
+          You have not created any quiz.
+        </h1>
+      ) : (
+        <>
+          <h1 className="mt-6 text-4xl">List of quizzes</h1>
+          <BasicTable tdata={quizzes} destroyQuiz={destroyQuiz} />
+        </>
+      )}
     </Container>
   );
 };

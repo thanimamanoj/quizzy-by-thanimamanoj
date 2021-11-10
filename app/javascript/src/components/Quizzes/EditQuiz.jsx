@@ -10,7 +10,6 @@ import QuizForm from "./Form/QuizForm";
 
 const EditQuiz = ({ history }) => {
   const [name, setName] = useState("");
-  const [userId, setUserId] = useState("");
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const { id } = useParams();
@@ -34,7 +33,6 @@ const EditQuiz = ({ history }) => {
     try {
       const response = await quizzesApi.show(id);
       setName(response.data.quiz.name);
-      setUserId(response.data.quiz.user_id);
     } catch (error) {
       logger.error(error);
     } finally {
@@ -59,9 +57,7 @@ const EditQuiz = ({ history }) => {
       <QuizForm
         type="update"
         name={name}
-        userId={userId}
         setName={setName}
-        setUserId={setUserId}
         loading={loading}
         handleSubmit={handleSubmit}
       />
