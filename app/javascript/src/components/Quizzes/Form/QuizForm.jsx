@@ -1,7 +1,8 @@
 import React from "react";
 
+import { Typography, Label, Input } from "@bigbinary/neetoui/v2";
+
 import Button from "components/Button";
-import Input from "components/Input";
 
 const QuizForm = ({
   type = "create",
@@ -10,14 +11,19 @@ const QuizForm = ({
   loading,
   handleSubmit,
 }) => {
-  type;
   return (
     <form className="max-w-lg mx-auto" onSubmit={handleSubmit}>
       {type === "create" ? (
-        <h1 className="mt-6 text-4xl">Add new quiz</h1>
-      ) : null}
+        <Typography className="my-6" style="h1">
+          Add new quiz
+        </Typography>
+      ) : (
+        <Typography className="my-6" style="h1">
+          Edit quiz
+        </Typography>
+      )}
       <div className="flex">
-        <label className="mt-8 mr-10 ml-0 text-gray-600">Quiz name</label>
+        <Label className="mt-8 mr-10 ml-0 text-gray-600">Quiz name</Label>
         <Input
           value={name}
           onChange={e => setName(e.target.value)}
