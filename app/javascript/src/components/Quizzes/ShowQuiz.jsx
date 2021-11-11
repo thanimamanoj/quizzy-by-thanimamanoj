@@ -40,6 +40,10 @@ const ShowQuiz = () => {
           label="Add questions"
           onClick={function noRefCheck() {}}
           style="primary"
+          to={{
+            pathname: "/questions/create",
+            state: { quiz_name: quizDetails?.name, quiz_id: quizDetails?.id },
+          }}
           icon="ri-add-box-fill"
           iconPosition="left"
           size="large"
