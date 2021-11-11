@@ -8,8 +8,6 @@ const QuestionForm = ({
   correct_answer,
   setCorrect_answer,
   optList,
-  //setOptList,
-  //loading,
   handleAdd,
   handleInputChange,
   handleRemove,
@@ -64,6 +62,8 @@ const QuestionForm = ({
       <div className="flex mt-6">
         <Label className="mt-8 mr-10 ml-0 text-gray-600">Correct Answer</Label>
         <Select
+          name="ValueList"
+          isSearchable
           placeholder="Select an Option"
           options={optList.map(({ option }, index) => {
             return { label: `Option ${index + 1}`, value: option };
@@ -71,7 +71,6 @@ const QuestionForm = ({
           value={correct_answer}
           onChange={e => {
             setCorrect_answer(e.value);
-            //console.log(correct_answer)
           }}
         />
       </div>
@@ -83,9 +82,6 @@ const QuestionForm = ({
           size="large"
         />
       </div>
-      <div style={{ marginTop: 20 }}>{JSON.stringify(optList)}</div>
-      <div>{JSON.stringify(correct_answer)}</div>
-      {/* {console.log(correct_answer)} */}
     </form>
   );
 };

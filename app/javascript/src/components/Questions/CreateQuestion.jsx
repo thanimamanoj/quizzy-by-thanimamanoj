@@ -12,12 +12,8 @@ const CreateQuestion = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const [correct_answer, setCorrect_answer] = useState();
   const [optList, setOptList] = useState([{ option: "" }, { option: "" }]);
-  // const [option_2,setOption_2] = useState("");
-  // const [option_3,setOption_3] = useState("");
-  // const [option_4,setOption_4] = useState("");
   const location = useLocation();
   const { quiz_name, quiz_id } = location.state;
-  //console.log("quizid",quiz_id)
   const handleSubmit = async event => {
     event.preventDefault();
     try {
@@ -33,7 +29,7 @@ const CreateQuestion = ({ history }) => {
         },
       });
       setLoading(false);
-      history.push("/quizzes/{quiz_id}/show");
+      history.push(`/quizzes/${quiz_id}/show`);
     } catch (error) {
       logger.error(error);
       setLoading(false);
@@ -47,14 +43,12 @@ const CreateQuestion = ({ history }) => {
     setOptList(list);
   };
 
-  // handle click event of the Remove button
   const handleRemove = index => {
     const list = [...optList];
     list.splice(index, 1);
     setOptList(list);
   };
 
-  // handle click event of the Add button
   const handleAdd = () => {
     setOptList([...optList, { option: "" }]);
   };
@@ -69,10 +63,6 @@ const CreateQuestion = ({ history }) => {
         setTitle={setTitle}
         optList={optList}
         setOptList={setOptList}
-        // setOption_1={setOption_1}
-        // setOption_2={setOption_2}
-        // setOption_3={setOption_3}
-        // setOption_4={setOption_4}
         correct_answer={correct_answer}
         setCorrect_answer={setCorrect_answer}
         loading={loading}
