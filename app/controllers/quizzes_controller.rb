@@ -26,7 +26,8 @@ class QuizzesController < ApplicationController
 
   def show
     authorize @quiz
-    render status: :ok, json: { quiz: @quiz }
+    @questions = @quiz.questions.order("created_at DESC")#-check if its needed
+    # render status: :ok, json: { quiz: @quiz }
   end
 
   def update
