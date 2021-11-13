@@ -5,14 +5,17 @@ import { useParams } from "react-router-dom";
 
 import quizzesApi from "apis/quizzes";
 import Container from "components/Container";
-//import PageLoader from "components/PageLoader";
+import Questions from "components/Questions";
+
+import questionsApi from "../../apis/questions";
 
 const ShowQuiz = () => {
   const { id } = useParams();
   const [quizDetails, setQuizDetails] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
+  //const [loading, setLoading] = useState(false);
 
-  // let history = useHistory();
+  //let history = useHistory();
 
   const fetchQuizDetails = async () => {
     try {
@@ -25,6 +28,14 @@ const ShowQuiz = () => {
     }
   };
 
+  const destroyQuestion = async id => {
+    try {
+      await questionsApi.destroy(id);
+      await fetchQuizDetails(); //find solution
+    } catch (error) {
+      logger.error(error);
+    }
+  };
   useEffect(() => {
     fetchQuizDetails();
   }, []);
@@ -48,13 +59,25 @@ const ShowQuiz = () => {
           iconPosition="left"
           size="large"
         />
+        {quizDetails.questions.length > 0 ? (
+          <Button label="Publish" size="large"></Button>
+        ) : null}
       </div>
       <Typography className="my-6" style="h1">
         {quizDetails?.name}
       </Typography>
-      <Typography className="mt-40 text-center text-gray-600" style="h2">
-        There are no questions in this quiz.
-      </Typography>
+      {quizDetails.questions.length === 0 ? (
+        <Typography className="mt-40 text-center text-gray-600" style="h2">
+          There are no questions in this quiz.
+          {/* {JSON.stringify(quizDetails)} */}
+        </Typography>
+      ) : (
+        <Questions
+          questions={quizDetails?.questions}
+          quiz_id={quizDetails?.id}
+          destroyQuestion={destroyQuestion}
+        />
+      )}
     </Container>
   );
 };

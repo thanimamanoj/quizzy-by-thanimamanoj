@@ -1,8 +1,15 @@
 import React from "react";
 
-import { Select, Label, Input, Button } from "@bigbinary/neetoui/v2";
+import {
+  Select,
+  Label,
+  Input,
+  Button,
+  Typography,
+} from "@bigbinary/neetoui/v2";
 
 const QuestionForm = ({
+  type = "create",
   title,
   setTitle,
   correct_answer,
@@ -15,6 +22,9 @@ const QuestionForm = ({
 }) => {
   return (
     <form className="max-w-lg mx-auto" onSubmit={handleSubmit}>
+      {type === "update" ? (
+        <Typography style="h4">Edit Question</Typography>
+      ) : null}
       <div className="flex">
         <Label className="mt-8 mr-10 ml-0 text-gray-600">Question</Label>
         <Input
