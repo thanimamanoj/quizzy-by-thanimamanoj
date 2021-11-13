@@ -3,6 +3,20 @@
 class QuestionsController < ApplicationController
   before_action :load_quiz, only: :create
   before_action :authenticate_user_using_x_auth_token
+  before_action :load_question, only: [:show, :update]
+
+  def show
+    render status: :ok, json: { question: @question }
+  end
+
+  def update
+    if @question.update(question_params)
+      render status: :ok, json: { notice: "Successfully updated question." }
+    else
+      render status: :unprocessable_entity,
+        json: { error: @question.errors.full_messages.to_sentence }
+    end
+  end
 
   def create
     question = @quiz.questions.new(question_params.merge(user_id: @current_user.id))
@@ -20,6 +34,13 @@ class QuestionsController < ApplicationController
       @quiz = Quiz.find_by(id: question_params[:quiz_id])
       unless @quiz
         render status: :not_found, json: { error: t("quiz.not_found") }
+      end
+    end
+
+    def load_question
+      @question = Question.find_by(id: params[:id])
+      unless @question
+        render status: :not_found, json: { error: t("question.not_found") }
       end
     end
 

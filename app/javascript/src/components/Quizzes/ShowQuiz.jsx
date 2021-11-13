@@ -64,6 +64,7 @@ const ShowQuiz = () => {
       ) : (
         <Questions
           questions={quizDetails?.questions}
+          quiz_id={quizDetails?.id}
           //loading={loading}
         />
       )}

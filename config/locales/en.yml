@@ -7,3 +7,5 @@ en:
     incorrect_credentials: "Incorrect credentials, try again."
   quiz:
     not_found: "Quiz not found"
+  question:
+    not_found: "Question not found"

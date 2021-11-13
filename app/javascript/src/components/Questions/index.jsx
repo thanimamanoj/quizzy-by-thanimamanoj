@@ -3,10 +3,7 @@ import React from "react";
 import { CheckCircle } from "@bigbinary/neeto-icons";
 import { Button, Label, Typography } from "@bigbinary/neetoui/v2";
 
-const Questions = ({
-  questions,
-  //loading,
-}) => {
+const Questions = ({ questions, quiz_id }) => {
   return (
     <>
       {questions?.map((question, index) => (
@@ -22,6 +19,12 @@ const Questions = ({
                 style="secondary"
                 icon={"ri-pencil-fill"}
                 iconPosition="left"
+                to={{
+                  pathname: `/questions/${question.id}/edit`,
+                  state: {
+                    quiz_id: quiz_id,
+                  },
+                }}
               />
             </div>
             <div className="ml-4">
