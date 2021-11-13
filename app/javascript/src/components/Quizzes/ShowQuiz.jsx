@@ -7,6 +7,8 @@ import quizzesApi from "apis/quizzes";
 import Container from "components/Container";
 import Questions from "components/Questions";
 
+import questionsApi from "../../apis/questions";
+
 const ShowQuiz = () => {
   const { id } = useParams();
   const [quizDetails, setQuizDetails] = useState([]);
@@ -26,6 +28,14 @@ const ShowQuiz = () => {
     }
   };
 
+  const destroyQuestion = async id => {
+    try {
+      await questionsApi.destroy(id);
+      await fetchQuizDetails(); //find solution
+    } catch (error) {
+      logger.error(error);
+    }
+  };
   useEffect(() => {
     fetchQuizDetails();
   }, []);
@@ -65,7 +75,7 @@ const ShowQuiz = () => {
         <Questions
           questions={quizDetails?.questions}
           quiz_id={quizDetails?.id}
-          //loading={loading}
+          destroyQuestion={destroyQuestion}
         />
       )}
     </Container>

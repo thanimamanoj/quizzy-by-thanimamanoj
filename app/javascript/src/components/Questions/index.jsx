@@ -3,7 +3,7 @@ import React from "react";
 import { CheckCircle } from "@bigbinary/neeto-icons";
 import { Button, Label, Typography } from "@bigbinary/neetoui/v2";
 
-const Questions = ({ questions, quiz_id }) => {
+const Questions = ({ questions, quiz_id, destroyQuestion }) => {
   return (
     <>
       {questions?.map((question, index) => (
@@ -33,6 +33,7 @@ const Questions = ({ questions, quiz_id }) => {
                 style="danger"
                 icon="ri-delete-bin-line"
                 iconPosition="left"
+                onClick={() => destroyQuestion(question.id)}
               />
             </div>
           </div>

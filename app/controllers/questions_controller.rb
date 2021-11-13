@@ -3,7 +3,7 @@
 class QuestionsController < ApplicationController
   before_action :load_quiz, only: :create
   before_action :authenticate_user_using_x_auth_token
-  before_action :load_question, only: [:show, :update]
+  before_action :load_question, only: [:show, :update, :destroy]
 
   def show
     render status: :ok, json: { question: @question }
@@ -25,6 +25,15 @@ class QuestionsController < ApplicationController
     else
       errors = question.errors.full_messages.to_sentence
       render status: :unprocessable_entity, json: { error: errors }
+    end
+  end
+
+  def destroy
+    if @question.destroy
+      render status: :ok, json: { notice: "Successfully deleted Question." }
+    else
+      render status: :unprocessable_entity,
+        json: { error: @question.errors.full_messages.to_sentence }
     end
   end
 
