@@ -13,14 +13,20 @@ class Quiz < ApplicationRecord
   private
 
     def set_slug
-      itr = 1
-      loop do
-        title_slug = name.parameterize
-        slug_candidate = itr > 1 ? "#{title_slug}-#{itr}" : title_slug
-        break self.slug = slug_candidate unless Quiz.exists?(slug: slug_candidate)
-
-        itr += 1
+      title_slug = name.parameterize
+      regex_pattern = "slug #{Constants::DB_REGEX_OPERATOR} ?"
+      latest_quiz_slug = Quiz.where(
+        regex_pattern,
+        "#{title_slug}$|#{title_slug}-[0-9]+$"
+      ).order(slug: :desc).first&.slug
+      slug_count = 0
+      if latest_quiz_slug.present?
+        slug_count = latest_quiz_slug.split("-").last.to_i
+        only_one_slug_exists = slug_count == 0
+        slug_count = 1 if only_one_slug_exists
       end
+      slug_candidate = slug_count.positive? ? "#{title_slug}-#{slug_count + 1}" : title_slug
+      self.slug = slug_candidate
     end
 
     def slug_not_changed
