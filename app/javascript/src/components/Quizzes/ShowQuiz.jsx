@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+import { CheckCircle } from "@bigbinary/neeto-icons";
 import { Button, Typography, PageLoader } from "@bigbinary/neetoui/v2";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import quizzesApi from "apis/quizzes";
 import Container from "components/Container";
@@ -13,9 +14,10 @@ const ShowQuiz = () => {
   const { id } = useParams();
   const [quizDetails, setQuizDetails] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
+  const [publish, setPublish] = useState(false);
   //const [loading, setLoading] = useState(false);
 
-  //let history = useHistory();
+  let history = useHistory();
 
   const fetchQuizDetails = async () => {
     try {
@@ -59,13 +61,29 @@ const ShowQuiz = () => {
           iconPosition="left"
           size="large"
         />
-        {quizDetails.questions.length > 0 ? (
-          <Button label="Publish" size="large"></Button>
+        {quizDetails.questions.length > 0 && publish === false ? (
+          <Button
+            label="Publish"
+            size="large"
+            onClick={() => setPublish(true)}
+          ></Button>
         ) : null}
       </div>
       <Typography className="my-6" style="h1">
         {quizDetails?.name}
       </Typography>
+      {publish === true ? (
+        <div className="flex">
+          <CheckCircle color="#1e1e20" size={20} />
+          <Typography style="h4">{` Published, your public link is - `}</Typography>
+          <Button
+            label={` http://localhost:3000/public/${quizDetails?.slug}`}
+            onClick={() => history.push(`/public/${quizDetails?.slug}`)}
+            style="link"
+          />
+        </div>
+      ) : null}
+      <br />
       {quizDetails.questions.length === 0 ? (
         <Typography className="mt-40 text-center text-gray-600" style="h2">
           There are no questions in this quiz.

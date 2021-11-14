@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 
 import { registerIntercepts, setAuthHeaders } from "apis/axios";
 import { initializeLogger } from "common/logger";
+import AttemptQuiz from "components/AttemptQuiz";
 import Login from "components/Authentication/Login";
 import PrivateRoute from "components/Common/PrivateRoute";
 import Dashboard from "components/Dashboard";
@@ -47,6 +48,7 @@ const App = () => {
         <Route exact path="/quizzes/:id/edit" component={EditQuiz} />
         <Route exact path="/questions/create" component={CreateQuestion} />
         <Route exact path="/questions/:id/edit" component={EditQuestion} />
+        <Route exact path="/public/:slug" component={AttemptQuiz} />
 
         <PrivateRoute
           path="/"
