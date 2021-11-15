@@ -8,7 +8,7 @@ class Quiz < ApplicationRecord
   validates :slug, uniqueness: true
   validate :slug_not_changed
 
-  before_create :set_slug# change this
+  # before_create :set_slug# change this
 
   def set_slug
     title_slug = name.parameterize
