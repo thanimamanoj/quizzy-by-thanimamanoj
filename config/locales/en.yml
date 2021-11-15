@@ -7,5 +7,7 @@ en:
     incorrect_credentials: "Incorrect credentials, try again."
   quiz:
     not_found: "Quiz not found"
+    slug:
+      immutable: "is immutable!"
   question:
     not_found: "Question not found"
