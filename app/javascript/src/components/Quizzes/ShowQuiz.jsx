@@ -38,6 +38,16 @@ const ShowQuiz = () => {
       logger.error(error);
     }
   };
+
+  const handlePublish = async () => {
+    setPublish(true);
+    try {
+      await quizzesApi.update({ id, payload: { quiz: { publish: true } } });
+      setTimeout(() => window.location.reload(), 1000);
+    } catch (error) {
+      logger.error(error);
+    }
+  };
   useEffect(() => {
     fetchQuizDetails();
   }, []);
@@ -62,11 +72,7 @@ const ShowQuiz = () => {
           size="large"
         />
         {quizDetails.questions.length > 0 && publish === false ? (
-          <Button
-            label="Publish"
-            size="large"
-            onClick={() => setPublish(true)}
-          ></Button>
+          <Button label="Publish" size="large" onClick={handlePublish}></Button>
         ) : null}
       </div>
       <Typography className="my-6" style="h1">
@@ -96,6 +102,7 @@ const ShowQuiz = () => {
           destroyQuestion={destroyQuestion}
         />
       )}
+      {JSON.stringify(quizDetails)}
     </Container>
   );
 };

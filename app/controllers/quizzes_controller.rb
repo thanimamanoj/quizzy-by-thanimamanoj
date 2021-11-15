@@ -38,6 +38,9 @@ class QuizzesController < ApplicationController
       render status: :unprocessable_entity,
         json: { error: @quiz.errors.full_messages.to_sentence }
     end
+    if params[:publish] === true
+      set_slug
+    end
   end
 
   def destroy
