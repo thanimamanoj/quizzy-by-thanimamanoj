@@ -9,7 +9,6 @@ class QuizzesController < ApplicationController
   def index
     quizzes = policy_scope(Quiz)
     quizzes = quizzes.order("created_at DESC")
-    # quizzes = quizzes.as_json(include: { user_id: { only: %i[id] } })
     render status: :ok, json: { quizzes: quizzes }
   end
 
@@ -32,11 +31,21 @@ class QuizzesController < ApplicationController
 
   def update
     authorize @quiz
-    if @quiz.update(quiz_params)
-      render status: :ok, json: { notice: "Successfully updated quiz." }
+    if params[:quiz][:publish] === true
+      @quiz.set_slug
+      if @quiz.save
+        render status: :ok, json: { notice: "Successfully published quiz." }
+      else
+        render status: :unprocessable_entity,
+          json: { error: @quiz.errors.full_messages.to_sentence }
+      end
     else
-      render status: :unprocessable_entity,
-        json: { error: @quiz.errors.full_messages.to_sentence }
+      if @quiz.update(quiz_params)
+        render status: :ok, json: { notice: "Successfully updated quiz." }
+      else
+        render status: :unprocessable_entity,
+          json: { error: @quiz.errors.full_messages.to_sentence }
+      end
     end
   end
 

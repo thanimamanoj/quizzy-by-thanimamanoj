@@ -14,7 +14,6 @@ const ShowQuiz = () => {
   const { id } = useParams();
   const [quizDetails, setQuizDetails] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
-  const [publish, setPublish] = useState(false);
   //const [loading, setLoading] = useState(false);
 
   let history = useHistory();
@@ -40,7 +39,6 @@ const ShowQuiz = () => {
   };
 
   const handlePublish = async () => {
-    setPublish(true);
     try {
       await quizzesApi.update({ id, payload: { quiz: { publish: true } } });
       setTimeout(() => window.location.reload(), 1000);
@@ -71,14 +69,14 @@ const ShowQuiz = () => {
           iconPosition="left"
           size="large"
         />
-        {quizDetails.questions.length > 0 && publish === false ? (
+        {quizDetails.questions.length > 0 && quizDetails.slug === null ? (
           <Button label="Publish" size="large" onClick={handlePublish}></Button>
         ) : null}
       </div>
       <Typography className="my-6" style="h1">
         {quizDetails?.name}
       </Typography>
-      {publish === true ? (
+      {quizDetails.slug != null ? (
         <div className="flex">
           <CheckCircle color="#1e1e20" size={20} />
           <Typography style="h4">{` Published, your public link is - `}</Typography>
@@ -102,7 +100,6 @@ const ShowQuiz = () => {
           destroyQuestion={destroyQuestion}
         />
       )}
-      {JSON.stringify(quizDetails)}
     </Container>
   );
 };

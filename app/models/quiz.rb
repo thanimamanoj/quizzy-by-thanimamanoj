@@ -5,10 +5,6 @@ class Quiz < ApplicationRecord
   belongs_to :user
 
   validates :name, presence: true
-  validates :slug, uniqueness: true
-  validate :slug_not_changed
-
-  # before_create :set_slug# change this
 
   def set_slug
     title_slug = name.parameterize
@@ -26,12 +22,4 @@ class Quiz < ApplicationRecord
     slug_candidate = slug_count.positive? ? "#{title_slug}-#{slug_count + 1}" : title_slug
     self.slug = slug_candidate
   end
-
-  private
-
-    def slug_not_changed
-      if slug_changed? && self.persisted?
-        errors.add(:slug, t("quiz.slug.immutable"))
-      end
-    end
 end
