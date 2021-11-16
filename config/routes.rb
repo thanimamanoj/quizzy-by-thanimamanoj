@@ -7,7 +7,10 @@ Rails.application.routes.draw do
     resources :quizzes, except: %i[new edit], param: :id
     resources :questions, except: %i[new edit], param: :id
   end
-
+  namespace :public do
+    resources :quizzes, only: :show, param: :slug
+    resources :users, only: :create, param: :slug
+  end
   root "home#index"
   get "*path", to: "home#index", via: :all
 end

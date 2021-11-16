@@ -11,6 +11,7 @@ import Login from "components/Authentication/Login";
 import PrivateRoute from "components/Common/PrivateRoute";
 import Dashboard from "components/Dashboard";
 import PageLoader from "components/PageLoader";
+import Signup from "components/Public/Signup";
 import CreateQuestion from "components/Questions/CreateQuestion";
 import EditQuestion from "components/Questions/EditQuestion";
 import CreateQuiz from "components/Quizzes/CreateQuiz";
@@ -49,7 +50,7 @@ const App = () => {
         <Route exact path="/questions/create" component={CreateQuestion} />
         <Route exact path="/questions/:id/edit" component={EditQuestion} />
         <Route exact path="/public/:slug" component={AttemptQuiz} />
-
+        <Route exact path="/public/:slug/attempt/new" component={Signup} />
         <PrivateRoute
           path="/"
           redirectRoute="/login"
