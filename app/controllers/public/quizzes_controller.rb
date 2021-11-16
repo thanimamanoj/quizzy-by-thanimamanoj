@@ -4,7 +4,7 @@ class Public::QuizzesController < ApplicationController
   before_action :load_quiz
 
   def show
-    @quiz
+    render status: :ok, json: { quiz: @quiz }
   end
 
   private

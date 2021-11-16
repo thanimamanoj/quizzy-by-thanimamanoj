@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Public::UsersController < ApplicationController
-  before_action :load_quiz
+  # before_action :load_quiz
 
   def create
     @user = User.new(user_params)
@@ -21,7 +21,6 @@ class Public::UsersController < ApplicationController
 
     def load_quiz
       @quiz = Quiz.find_by(slug: params[:slug])
-      puts @quiz
       unless @quiz
         render status: :not_found, json: { error: t("quiz.not_found") }
       end

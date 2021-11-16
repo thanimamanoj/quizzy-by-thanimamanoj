@@ -7,8 +7,7 @@ const SignupForm = ({
   setFirstName,
   setLastName,
   setEmail,
-  // name,
-  slug,
+  name,
 }) => {
   return (
     <div
@@ -21,7 +20,7 @@ const SignupForm = ({
           className="mt-6 text-3xl font-extrabold leading-9
         text-center text-gray-500"
         >
-          {`Welcome to ${slug}`}
+          {`Welcome to ${name}`}
         </Typography>
         <form className="mt-8" onSubmit={handleSubmit}>
           <div className="my-5 flex">
