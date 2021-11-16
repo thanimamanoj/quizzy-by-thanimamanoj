@@ -41,10 +41,12 @@ const Signup = ({ history }) => {
           email,
           password,
           password_confirmation: passwordConfirmation,
+          slug: slug,
         },
       });
       setLoading(false);
       history;
+
       //<>
     } catch (error) {
       logger.error(error);
