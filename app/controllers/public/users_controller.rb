@@ -12,13 +12,9 @@ class Public::UsersController < ApplicationController
       end
     else
       @user = User.new(user_params)
-      if @user.save
-        render status: :ok, json: { notice: "User was successfully created!" }
-        create_attempt
-      else
-        render status: :unprocessable_entity,
-          json: { error: @user.errors.full_messages.to_sentence }
-      end
+      @user.save!
+      create_attempt
+
     end
   end
 

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Question < ApplicationRecord
+  has_many :attempt_answers
   belongs_to :quiz
   belongs_to :user
 

@@ -82,9 +82,7 @@ const ShowQuiz = () => {
           <Typography style="h4">{` Published, your public link is - `}</Typography>
           <Button
             label={` http://localhost:3000/public/${quizDetails?.slug}`}
-            onClick={() =>
-              history.push(`/public/${quizDetails?.slug}/attempt/new`)
-            }
+            onClick={() => history.push(`/public/${quizDetails?.slug}`)}
             style="link"
           />
         </div>
