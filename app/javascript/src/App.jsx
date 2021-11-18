@@ -6,11 +6,13 @@ import { ToastContainer } from "react-toastify";
 
 import { registerIntercepts, setAuthHeaders } from "apis/axios";
 import { initializeLogger } from "common/logger";
-import AttemptQuiz from "components/AttemptQuiz";
+//import AttemptQuiz from "components/Public/Attempt/AttemptQuiz";
 import Login from "components/Authentication/Login";
 import PrivateRoute from "components/Common/PrivateRoute";
 import Dashboard from "components/Dashboard";
 import PageLoader from "components/PageLoader";
+import Public from "components/Public/index";
+import Signup from "components/Public/Signup";
 import CreateQuestion from "components/Questions/CreateQuestion";
 import EditQuestion from "components/Questions/EditQuestion";
 import CreateQuiz from "components/Quizzes/CreateQuiz";
@@ -48,8 +50,9 @@ const App = () => {
         <Route exact path="/quizzes/:id/edit" component={EditQuiz} />
         <Route exact path="/questions/create" component={CreateQuestion} />
         <Route exact path="/questions/:id/edit" component={EditQuestion} />
-        <Route exact path="/public/:slug" component={AttemptQuiz} />
-
+        <Route exact path="/public/:slug" component={Public} />
+        {/* <Route exact path="/public/:slug/attempt/new" component={AttemptQuiz} /> */}
+        <Route exact path="/public/:slug/attempt/new" component={Signup} />
         <PrivateRoute
           path="/"
           redirectRoute="/login"
