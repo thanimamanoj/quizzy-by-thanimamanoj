@@ -3,17 +3,16 @@ import React from "react";
 import { Typography, Label, Radio, Button } from "@bigbinary/neetoui/v2";
 
 const AttemptQuizForm = ({
-  quiz,
   question,
   handleAnswerChange,
-  answer,
+
   handleSubmit,
 }) => {
   return (
     <div>
-      {JSON.stringify(quiz)}
+      {/* {JSON.stringify(quiz)}
       {JSON.stringify(question)}
-      {JSON.stringify(answer)}
+      {JSON.stringify(answer)} */}
       <form className="mt-8" onSubmit={handleSubmit}>
         {question?.map((ques, index) => (
           <div key={ques.id} className="px-4 py-3 my-2  ml-24 ">
@@ -23,17 +22,11 @@ const AttemptQuizForm = ({
                 {ques.title}
               </Typography>
             </div>
-            <Radio
-              className="ml-24 space-y-4"
-              //className="space-y-4"
-              stacked
-              //onClick={() => setAnswer(prev => [...prev, e.target.value])}
-            >
+            <Radio className="ml-24 space-y-4" stacked>
               <Radio.Item
                 className="ml-40"
                 label={ques.option_1}
                 value={ques.option_1}
-                //name={`answer_${index}`}
                 name={ques.id}
                 onClick={e => handleAnswerChange(e, index)}
               />

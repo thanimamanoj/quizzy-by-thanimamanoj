@@ -6,12 +6,15 @@ import { Typography } from "@bigbinary/neetoui/v2";
 import attemptsApi from "apis/attempts";
 
 import AttemptQuizForm from "./AttemptQuizForm";
+import QuizResult from "./QuizResult";
 
 const AttemptQuiz = ({ attempt_id, quiz, question }) => {
   //const { slug } = useParams();
   const [answer, setAnswer] = useState([]);
   const [loading, setLoading] = useState(false);
-  //const [showResult, setShowResult] = useState(false)
+  const [showResult, setShowResult] = useState(false);
+  const [correct, setCorrect] = useState(0);
+  const [incorrect, setIncorrect] = useState(0);
   const handleSubmit = async event => {
     event.preventDefault();
     setLoading(true);
@@ -22,11 +25,14 @@ const AttemptQuiz = ({ attempt_id, quiz, question }) => {
           attempt_id: attempt_id,
         },
       });
-      response;
+      setCorrect(response.data.attempt_answer.correct_count);
+      setIncorrect(response.data.attempt_answer.incorrect_count);
       //console.log("in permit params")
       //console.log(response.data.attempt_answer)
+      //console.log(response.data.attempt_answer.correct_count)
+      //console.log(corr,incorr)
       setLoading(false);
-      // setShowResult(true);
+      setShowResult(true);
     } catch (error) {
       logger.error(error);
       setLoading(false);
@@ -42,6 +48,18 @@ const AttemptQuiz = ({ attempt_id, quiz, question }) => {
     setAnswer(list);
     //console.log(answer);
   };
+  if (showResult) {
+    return (
+      <QuizResult
+        quiz={quiz}
+        question={question}
+        answer={answer}
+        correct={correct}
+        incorrect={incorrect}
+      />
+    );
+  }
+
   return (
     <div>
       {JSON.stringify(answer)}
@@ -53,12 +71,10 @@ const AttemptQuiz = ({ attempt_id, quiz, question }) => {
         {quiz?.name}
       </Typography>
       <AttemptQuizForm
-        quiz={quiz}
         question={question}
         setAnswer={setAnswer}
         loading={loading}
         handleAnswerChange={handleAnswerChange}
-        answer={answer}
         handleSubmit={handleSubmit}
       />
     </div>
