@@ -24,7 +24,7 @@ class Public::AttemptAnswersController < ApplicationController
         else
           @incorrect += 1
         end
-        @attempt.update(submit: true)
+        @attempt.update(submit: true, correct_answers_count: @correct, incorrect_answers_count: @incorrect)
       end
     end
   end

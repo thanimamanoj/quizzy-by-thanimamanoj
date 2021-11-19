@@ -18,6 +18,7 @@ import EditQuestion from "components/Questions/EditQuestion";
 import CreateQuiz from "components/Quizzes/CreateQuiz";
 import EditQuiz from "components/Quizzes/EditQuiz";
 import ShowQuiz from "components/Quizzes/ShowQuiz";
+import ShowReport from "components/Reports/ShowReport";
 import { getFromLocalStorage } from "helpers/storage";
 
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
         <Route exact path="/public/:slug" component={Public} />
         {/* <Route exact path="/public/:slug/attempt/new" component={AttemptQuiz} /> */}
         <Route exact path="/public/:slug/attempt/new" component={Signup} />
+        <Route exact path="/reports" component={ShowReport} />
         <PrivateRoute
           path="/"
           redirectRoute="/login"
