@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   namespace :public do
     resources :quizzes, only: :show, param: :slug
     resources :users, only: :create, param: :slug
-    resources :attempts, only: %i[show]
+    resources :attempts, only: %i[show index]
     resources :attempt_answers, only: :create
   end
   root "home#index"

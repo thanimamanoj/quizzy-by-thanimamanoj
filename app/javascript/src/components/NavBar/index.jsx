@@ -42,6 +42,7 @@ const NavBar = () => {
               transition duration-150 ease-in-out border-b-2
               border-transparent hover:text-bb-gray-600 focus:outline-none
               focus:text-bb-gray-700 cursor-pointer underline"
+              href={`/reports`}
             >
               Reports
             </a>

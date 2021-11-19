@@ -4,6 +4,8 @@ import { Button, Typography } from "@bigbinary/neetoui/v2";
 import { useHistory } from "react-router-dom";
 import { useTable } from "react-table";
 
+import "components/Reports/table.css";
+
 import { COLUMNS } from "./columns";
 import Modal from "./Modal";
 
@@ -27,7 +29,7 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
         <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
           <div className="overflow-hidden border-b border-gray-200 shadow md:custom-box-shadow">
             <table
-              className="min-w-full divide-y divide-gray-200"
+              // className="min-w-full divide-y divide-gray-200"
               {...getTableProps()}
             >
               <thead>
@@ -37,7 +39,7 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
                       <th
                         key={i}
                         className="px-6 py-3 text-s font-bold leading-4 tracking-wider
-        text-left text-bb-black text-opacity-50 uppercase bg-gray-50"
+         text-left text-bb-black text-opacity-50 uppercase bg-gray-50"
                         {...column.getHeaderProps()}
                       >
                         {column.render("Header")}
@@ -48,7 +50,7 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
               </thead>
               <tbody
                 {...getTableBodyProps()}
-                className="bg-white divide-y divide-gray-200"
+                //className="bg-white divide-y divide-gray-200"
               >
                 {rows.map((row, index) => {
                   prepareRow(row);
@@ -59,15 +61,16 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
                           <>
                             <td
                               key={i}
-                              className="block w-64 px-6 py-4 text-xl font-medium
-                              leading-8 text-bb-purple truncate"
+                              // className="block w-64 px-6 py-4 text-xl font-medium
+                              // leading-8 text-bb-purple truncate"
                               {...cell.getCellProps()}
                             >
                               <Typography style="h4">
                                 {cell.render("Cell")}
                               </Typography>
                             </td>
-                            <td className="px-4 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
+                            <td //className="px-4 py-4 text-sm font-medium leading-5 text-right cursor-pointer"
+                            >
                               <Button
                                 label="Show"
                                 onClick={() => {
@@ -79,7 +82,9 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
                                 size="large"
                               />
                             </td>
-                            <td className="px-4 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
+                            <td
+                            //className="px-4 py-4 text-sm font-medium leading-5 text-right cursor-pointer"
+                            >
                               <Button
                                 label="Edit"
                                 onClick={() => {
@@ -93,7 +98,9 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
                                 size="large"
                               />
                             </td>
-                            <td className="px-4 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
+                            <td
+                            //className="px-4 py-4 text-sm font-medium leading-5 text-right cursor-pointer"
+                            >
                               <Button
                                 label="Delete"
                                 onClick={() => {
