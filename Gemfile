@@ -58,3 +58,9 @@ gem "react-rails"
 gem "bcrypt", "~> 3.1.13"
 
 gem "pundit"
+
+gem "sidekiq"
+gem "sidekiq-status"
+
+gem "caxlsx"
+gem "zip-zip"

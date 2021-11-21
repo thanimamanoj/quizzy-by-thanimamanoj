@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     resources :attempts, only: %i[show index]
     resources :attempt_answers, only: :create
   end
+  get "/export" => "reports#export"
+  get "/export_status" => "reports#export_status"
+  get "/export_download" => "reports#export_download"
   root "home#index"
   get "*path", to: "home#index", via: :all
 end
