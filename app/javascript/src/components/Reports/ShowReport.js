@@ -53,7 +53,7 @@ const ShowReport = () => {
     }
   };
 
-  const downloadReport = () => {
+  const downloadFinalReport = () => {
     window.location.href = `/export_download?id=${jobId}`;
   };
   return (
@@ -71,25 +71,23 @@ const ShowReport = () => {
               iconPosition="left"
               label="Download"
               onClick={handleDownload}
-              style="secondary"
+              style="primary"
             />
           ) : null}
         </div>
         <div>
           {downloading ? (
             <div className="py-32">
-              <PageLoader text="Your report is being prepared for download" />
+              <PageLoader text="Your report is being prepared for downloading" />
             </div>
           ) : show ? (
-            <div className=" flex flex-col items-center mt-32 space-y-4">
+            <div className=" flex flex-col space-y-4 items-center mt-32 ">
               <Typography style="h3">
-                Report is now ready for download
+                Report is now ready for download.
               </Typography>
               <Button
-                icon={Download}
-                iconPosition="left"
                 label="Download Report"
-                onClick={downloadReport}
+                onClick={downloadFinalReport}
                 size="large"
               />
             </div>

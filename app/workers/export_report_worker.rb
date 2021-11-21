@@ -8,11 +8,10 @@ class ExportReportWorker
     # Do something
     puts "exporting is being performed"
     @reports = []
-    @current_user = User.find_by_id(current_user_id)
+    @current_user = User.find_by(id: current_user_id)
     @current_user.quizzes.each do |quiz|
       @reports.push(*quiz.attempts.where(submit: true))
     end
-    puts @reports
 
     total @reports.size
     xlsx_package = Axlsx::Package.new
