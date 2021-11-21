@@ -5,7 +5,7 @@ import { useTable, useSortBy } from "react-table";
 import { COLUMNS } from "./column";
 import "./table.css";
 
-const Table = ({ report }) => {
+const BasicTable = ({ report }) => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(
     () =>
@@ -71,4 +71,4 @@ const Table = ({ report }) => {
   );
 };
 
-export default Table;
+export default BasicTable;
