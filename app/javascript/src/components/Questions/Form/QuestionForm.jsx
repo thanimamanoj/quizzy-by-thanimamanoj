@@ -20,6 +20,10 @@ const QuestionForm = ({
   handleRemove,
   handleSubmit,
 }) => {
+  const options = optList.map(({ option }, index) => {
+    return { label: `Option ${index + 1}`, value: option };
+  });
+
   return (
     <form className="max-w-lg mx-auto" onSubmit={handleSubmit}>
       {type === "update" ? (
@@ -78,9 +82,14 @@ const QuestionForm = ({
           options={optList.map(({ option }, index) => {
             return { label: `Option ${index + 1}`, value: option };
           })}
-          value={correct_answer}
+          value={options.filter(function (option) {
+            return option.value === correct_answer;
+          })}
+          //value={correct_answer}
+
           onChange={e => {
             setCorrect_answer(e.value);
+            //console.log(e)
           }}
         />
       </div>
