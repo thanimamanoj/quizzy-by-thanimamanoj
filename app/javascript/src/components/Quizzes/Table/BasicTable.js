@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 
-import { Button, Typography } from "@bigbinary/neetoui/v2";
+import { Button } from "@bigbinary/neetoui/v2";
 import { useHistory } from "react-router-dom";
 import { useTable } from "react-table";
 
@@ -28,30 +28,19 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
       <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
           <div className="overflow-hidden border-b border-gray-200 shadow md:custom-box-shadow">
-            <table
-              // className="min-w-full divide-y divide-gray-200"
-              {...getTableProps()}
-            >
+            <table {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup, index) => (
                   <tr key={index} {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column, i) => (
-                      <th
-                        key={i}
-                        className="px-6 py-3 text-s font-bold leading-4 tracking-wider
-         text-left text-bb-black text-opacity-50 uppercase bg-gray-50"
-                        {...column.getHeaderProps()}
-                      >
+                      <th key={i} {...column.getHeaderProps()}>
                         {column.render("Header")}
                       </th>
                     ))}
                   </tr>
                 ))}
               </thead>
-              <tbody
-                {...getTableBodyProps()}
-                //className="bg-white divide-y divide-gray-200"
-              >
+              <tbody {...getTableBodyProps()}>
                 {rows.map((row, index) => {
                   prepareRow(row);
                   return (
@@ -59,66 +48,53 @@ const BasicTable = ({ tdata, destroyQuiz }) => {
                       {row.cells.map((cell, i) => {
                         return (
                           <>
-                            <td
-                              key={i}
-                              // className="block w-64 px-6 py-4 text-xl font-medium
-                              // leading-8 text-bb-purple truncate"
-                              {...cell.getCellProps()}
-                            >
-                              <Typography style="h4">
-                                {cell.render("Cell")}
-                              </Typography>
-                            </td>
-                            <td //className="px-4 py-4 text-sm font-medium leading-5 text-right cursor-pointer"
-                            >
-                              <Button
-                                label="Show"
-                                onClick={() => {
-                                  history.push(
-                                    `/quizzes/${row.original.id}/show`
-                                  );
-                                }}
-                                style="secondary"
-                                size="large"
-                              />
-                            </td>
-                            <td
-                            //className="px-4 py-4 text-sm font-medium leading-5 text-right cursor-pointer"
-                            >
-                              <Button
-                                label="Edit"
-                                onClick={() => {
-                                  history.push(
-                                    `/quizzes/${row.original.id}/edit`
-                                  );
-                                }}
-                                style="secondary"
-                                icon={"ri-pencil-fill"}
-                                iconPosition="left"
-                                size="large"
-                              />
-                            </td>
-                            <td
-                            //className="px-4 py-4 text-sm font-medium leading-5 text-right cursor-pointer"
-                            >
-                              <Button
-                                label="Delete"
-                                onClick={() => {
-                                  setOpen(true);
-                                  setId(row.original.id);
-                                }}
-                                style="danger"
-                                icon="ri-delete-bin-line"
-                                iconPosition="left"
-                                size="large"
-                              />
-                              {open ? (
-                                <Modal
-                                  setOpen={setOpen}
-                                  id={id}
-                                  destroyQuiz={destroyQuiz}
+                            <td key={i} {...cell.getCellProps()}>
+                              <div className="flex  ">
+                                <Button
+                                  label={cell.render("Cell")}
+                                  onClick={() => {
+                                    history.push(
+                                      `/quizzes/${row.original.id}/show`
+                                    );
+                                  }}
+                                  style="text"
+                                  // size="large"
                                 />
-                              ) : null}
+                                <div className=" mx-auto">
+                                  <Button
+                                    label="Edit"
+                                    onClick={() => {
+                                      history.push(
+                                        `/quizzes/${row.original.id}/edit`
+                                      );
+                                    }}
+                                    style="secondary"
+                                    icon={"ri-pencil-fill"}
+                                    iconPosition="left"
+                                    //size="large"
+                                  />
+                                </div>
+                                <div className=" mr-8">
+                                  <Button
+                                    label="Delete"
+                                    onClick={() => {
+                                      setOpen(true);
+                                      setId(row.original.id);
+                                    }}
+                                    style="danger"
+                                    icon="ri-delete-bin-line"
+                                    iconPosition="left"
+                                    //size="large"
+                                  />
+                                  {open ? (
+                                    <Modal
+                                      setOpen={setOpen}
+                                      id={id}
+                                      destroyQuiz={destroyQuiz}
+                                    />
+                                  ) : null}
+                                </div>
+                              </div>
                             </td>
                           </>
                         );
