@@ -54,7 +54,7 @@ const AttemptQuiz = ({ attempt_id, quiz, question, user }) => {
 
   return (
     <div>
-      {JSON.stringify(answer)}
+      {/* {JSON.stringify(answer)} */}
       <Typography className="my-6 ml-4" style="h1">
         Quizzy
       </Typography>
