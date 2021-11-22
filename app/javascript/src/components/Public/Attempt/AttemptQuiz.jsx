@@ -5,9 +5,10 @@ import { Typography } from "@bigbinary/neetoui/v2";
 import attemptsApi from "apis/attempts";
 
 import AttemptQuizForm from "./AttemptQuizForm";
-import QuizResult from "./QuizResult";
 
-const AttemptQuiz = ({ attempt_id, quiz, question }) => {
+import ShowResult from "../ShowResult";
+
+const AttemptQuiz = ({ attempt_id, quiz, question, user }) => {
   const [answer, setAnswer] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
@@ -41,19 +42,19 @@ const AttemptQuiz = ({ attempt_id, quiz, question }) => {
   };
   if (showResult) {
     return (
-      <QuizResult
-        quiz={quiz}
-        question={question}
-        answer={answer}
+      <ShowResult
         correct={correct}
         incorrect={incorrect}
+        quiz={quiz}
+        question={question}
+        user={user}
       />
     );
   }
 
   return (
     <div>
-      {/* {JSON.stringify(answer)} */}
+      {JSON.stringify(answer)}
       <Typography className="my-6 ml-4" style="h1">
         Quizzy
       </Typography>

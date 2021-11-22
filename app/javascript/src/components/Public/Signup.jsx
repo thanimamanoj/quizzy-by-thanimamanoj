@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import { Typography } from "@bigbinary/neetoui/v2";
 import { useParams } from "react-router";
 
 import authApi from "apis/auth";
@@ -92,13 +91,14 @@ const Signup = () => {
         quiz_id={quiz.id}
         quiz={quiz}
         question={question}
+        user={user}
       />
     );
   }
 
-  if (open) {
-    return (
-      <div>
+  return (
+    <div>
+      {open ? (
         <ShowResult
           correct={correct}
           incorrect={incorrect}
@@ -106,14 +106,8 @@ const Signup = () => {
           question={question}
           user={user}
         />
-      </div>
-    );
-  }
-
-  return (
-    <Typography className="flex justify-center mt-24" style="h1">
-      Incorrect link for quiz
-    </Typography>
+      ) : null}
+    </div>
   );
 };
 
