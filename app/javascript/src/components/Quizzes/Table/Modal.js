@@ -8,7 +8,7 @@ function Modal({ setOpen, id, destroyQuiz }) {
   const handleDelete = id => {
     destroyQuiz(id);
     setOpen(false);
-    //window.location.reload(false)
+    setTimeout(() => window.location.reload(), 1000);
     history.push("/");
   };
   return (

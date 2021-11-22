@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { CheckCircle } from "@bigbinary/neeto-icons";
 import { Typography, Label, Radio } from "@bigbinary/neetoui/v2";
 
-const QuizResult = ({ quiz, question, answer, correct, incorrect }) => {
+import attemptsApi from "apis/attempts";
+
+const ShowResult = ({ correct, incorrect, quiz, question, user }) => {
+  const [answer, setAnswer] = useState([]);
+
+  const fetchAttemptDetails = async () => {
+    try {
+      const response = await attemptsApi.getAttempt(user.attempt_id);
+      setAnswer(response.data.attempt.ans);
+    } catch (error) {
+      logger.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchAttemptDetails();
+  }, []);
   return (
     <div>
       <Typography className="my-6 ml-6" style="h1">
@@ -31,11 +46,13 @@ const QuizResult = ({ quiz, question, answer, correct, incorrect }) => {
                 className="ml-40"
                 label={ques.option_1}
                 value={ques.option_1}
-                checked={answer[index][1] === ques.option_1}
+                checked={
+                  answer
+                    .filter(i => i.question_id === ques.id)
+                    .filter(i => i.answer === ques.option_1).length > 0
+                }
                 name={ques.id}
-                //disabled={true}
               />
-
               {ques.option_1 === ques.correct_answer ? (
                 <div className="flex">
                   <CheckCircle color="green" size={20} />
@@ -48,9 +65,12 @@ const QuizResult = ({ quiz, question, answer, correct, incorrect }) => {
                 className="ml-40"
                 label={ques.option_2}
                 value={ques.option_2}
-                checked={answer[index][1] === ques.option_2}
+                checked={
+                  answer
+                    .filter(i => i.question_id === ques.id)
+                    .filter(i => i.answer === ques.option_2).length > 0
+                }
                 name={ques.id}
-                //disabled={true}
               />
               {ques.option_2 === ques.correct_answer ? (
                 <div className="flex">
@@ -65,9 +85,12 @@ const QuizResult = ({ quiz, question, answer, correct, incorrect }) => {
                   className="ml-40"
                   label={ques.option_3}
                   value={ques.option_3}
-                  checked={answer[index][1] === ques.option_3}
+                  checked={
+                    answer
+                      .filter(i => i.question_id === ques.id)
+                      .filter(i => i.answer === ques.option_3).length > 0
+                  }
                   name={ques.id}
-                  //disabled={true}
                 />
                 {ques.option_3 === ques.correct_answer ? (
                   <div className="flex">
@@ -83,9 +106,12 @@ const QuizResult = ({ quiz, question, answer, correct, incorrect }) => {
                   className="ml-40"
                   label={ques.option_4}
                   value={ques.option_4}
-                  checked={answer[index][1] === ques.option_4}
+                  checked={
+                    answer
+                      .filter(i => i.question_id === ques.id)
+                      .filter(i => i.answer === ques.option_4).length > 0
+                  }
                   name={ques.id}
-                  //disabled={true}
                 />
                 {ques.option_4 === ques.correct_answer ? (
                   <div className="flex">
@@ -102,4 +128,4 @@ const QuizResult = ({ quiz, question, answer, correct, incorrect }) => {
   );
 };
 
-export default QuizResult;
+export default ShowResult;

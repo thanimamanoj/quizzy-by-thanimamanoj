@@ -6,4 +6,6 @@ json.user do
   json.attempt_id @attempt.id
   json.email @user.email
   json.submit @attempt.submit
+  json.correct_answers_count @attempt.correct_answers_count
+  json.incorrect_answers_count @attempt.incorrect_answers_count
 end
