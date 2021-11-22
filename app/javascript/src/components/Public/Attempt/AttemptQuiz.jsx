@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-//import { useParams } from "react-router";
 import { Typography } from "@bigbinary/neetoui/v2";
 
 import attemptsApi from "apis/attempts";
@@ -9,7 +8,6 @@ import AttemptQuizForm from "./AttemptQuizForm";
 import QuizResult from "./QuizResult";
 
 const AttemptQuiz = ({ attempt_id, quiz, question }) => {
-  //const { slug } = useParams();
   const [answer, setAnswer] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
@@ -27,10 +25,6 @@ const AttemptQuiz = ({ attempt_id, quiz, question }) => {
       });
       setCorrect(response.data.attempt_answer.correct_count);
       setIncorrect(response.data.attempt_answer.incorrect_count);
-      //console.log("in permit params")
-      //console.log(response.data.attempt_answer)
-      //console.log(response.data.attempt_answer.correct_count)
-      //console.log(corr,incorr)
       setLoading(false);
       setShowResult(true);
     } catch (error) {
@@ -42,11 +36,8 @@ const AttemptQuiz = ({ attempt_id, quiz, question }) => {
   const handleAnswerChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...answer];
-    //list[index] = {[name]: value};
     list[index] = [name, value];
-    //console.log(index);
     setAnswer(list);
-    //console.log(answer);
   };
   if (showResult) {
     return (
@@ -62,7 +53,7 @@ const AttemptQuiz = ({ attempt_id, quiz, question }) => {
 
   return (
     <div>
-      {JSON.stringify(answer)}
+      {/* {JSON.stringify(answer)} */}
       <Typography className="my-6 ml-4" style="h1">
         Quizzy
       </Typography>

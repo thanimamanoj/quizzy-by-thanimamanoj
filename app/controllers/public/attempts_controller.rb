@@ -12,5 +12,9 @@ class Public::AttemptsController < ApplicationController
 
   def show
     @attempt = Attempt.find_by_id(params[:id])
+    @ans = []
+    @attempt.attempt_answers.each do |a|
+      @ans.push(*a)
+    end
   end
 end

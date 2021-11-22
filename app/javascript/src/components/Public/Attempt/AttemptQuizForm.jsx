@@ -10,9 +10,6 @@ const AttemptQuizForm = ({
 }) => {
   return (
     <div>
-      {/* {JSON.stringify(quiz)}
-      {JSON.stringify(question)}
-      {JSON.stringify(answer)} */}
       <form className="mt-8" onSubmit={handleSubmit}>
         {question?.map((ques, index) => (
           <div key={ques.id} className="px-4 py-3 my-2  ml-24 ">
