@@ -18,10 +18,12 @@ const AttemptQuiz = ({ attempt_id, quiz, question, user }) => {
     event.preventDefault();
     setLoading(true);
     try {
+      const answer_length = answer.filter(i => i != null).length;
       const response = await attemptsApi.create({
         attempt_answer: {
           answer: answer,
           attempt_id: attempt_id,
+          unanswered: question.length - answer_length,
         },
       });
       setCorrect(response.data.attempt_answer.correct_count);
