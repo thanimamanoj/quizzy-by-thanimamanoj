@@ -24,20 +24,37 @@ const Signup = () => {
   const [open, setOpen] = useState(false);
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
+  const [verify, setVerify] = useState(false);
+  const [quiz_name, setQuizName] = useState();
 
-  const fetchQuizDetails = async () => {
+  const verifyDetails = async () => {
     try {
-      const response = await quizzesApi.showQuiz(slug);
-      setQuiz(response.data.quiz);
-      setQuestion(response.data.question);
+      verify;
+      const response = await quizzesApi.verifySlug(slug);
+      if (response.data.quiz) {
+        setVerify(true);
+        setQuizName(response.data.quiz.name);
+      }
     } catch (error) {
       logger.error(error);
     }
   };
 
   useEffect(() => {
-    fetchQuizDetails();
+    verifyDetails();
   }, []);
+
+  const fetchQuizDetails = async () => {
+    try {
+      const response = await quizzesApi.showQuiz(slug);
+      if (response.data.quiz) {
+        setQuiz(response.data.quiz);
+        setQuestion(response.data.question);
+      }
+    } catch (error) {
+      logger.error(error);
+    }
+  };
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -54,6 +71,7 @@ const Signup = () => {
         },
       });
       setUser(response.data.user);
+      fetchQuizDetails();
       if (response.data.user.submit) {
         setOpen(true);
 
@@ -69,7 +87,7 @@ const Signup = () => {
       setLoading(false);
     }
   };
-  if (quiz?.id && startQuiz === false && !open) {
+  if (quiz_name && startQuiz === false && !open) {
     return (
       <div>
         <SignupForm
@@ -80,7 +98,7 @@ const Signup = () => {
           setPasswordConfirmation={setPasswordConfirmation}
           loading={loading}
           handleSubmit={handleSubmit}
-          name={quiz?.name}
+          name={quiz_name}
         />
       </div>
     );

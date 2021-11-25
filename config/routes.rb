@@ -8,11 +8,14 @@ Rails.application.routes.draw do
     resources :questions, except: %i[new edit], param: :id
   end
   namespace :public do
-    resources :quizzes, only: :show, param: :slug
+    resources :quizzes, only: %i[show ], param: :slug
     resources :users, only: :create, param: :slug
     resources :attempts, only: %i[show index]
     resources :attempt_answers, only: :create
+
   end
+
+  get "/public/quizzes/verify/:slug" => "public/quizzes#verify"
   get "/export" => "reports#export"
   get "/export_status" => "reports#export_status"
   get "/export_download" => "reports#export_download"

@@ -8,12 +8,13 @@ import quizzesApi from "apis/quizzes";
 const Public = ({ history }) => {
   const { slug } = useParams();
   const [loading, setLoading] = useState(false);
-
-  const fetchQuizDetails = async () => {
+  const [verify, setVerify] = useState(false);
+  const verifyDetails = async () => {
     try {
       setLoading(true);
-      const response = await quizzesApi.showQuiz(slug);
-      if (response.data.quiz) {
+      const response = await quizzesApi.verifySlug(slug);
+      if (response.data.quiz.name) {
+        setVerify(true);
         history.push(`/public/${slug}/attempt/new`);
       }
       setLoading(false);
@@ -24,12 +25,16 @@ const Public = ({ history }) => {
   };
 
   useEffect(() => {
-    fetchQuizDetails();
+    verifyDetails();
   }, []);
 
   return (
-    <div className="flex justify-center items-center ">
-      {!loading ? <Typography style="h2">Incorrect link</Typography> : null}
+    <div>
+      <div className="flex justify-center items-center ">
+        {!loading && !verify ? (
+          <Typography style="h2">Incorrect link</Typography>
+        ) : null}
+      </div>
     </div>
   );
 };
