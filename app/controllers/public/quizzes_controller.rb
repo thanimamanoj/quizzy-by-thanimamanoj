@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class Public::QuizzesController < ApplicationController
-  before_action :load_quiz
+  before_action :load_quiz, only: %i[show verify]
+
+  def verify
+    render status: :ok, json: { quiz: @quiz }
+  end
 
   def show
     @questions = @quiz.questions.all
