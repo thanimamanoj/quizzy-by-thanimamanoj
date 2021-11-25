@@ -9,6 +9,8 @@ class Public::AttemptAnswersController < ApplicationController
       render status: :unprocessable_entity, json: { error: "Quiz has already been submitted" }
     else
       @attempts_value = params[:attempt_answer][:answer]
+      @unanswered = params[:attempt_answer][:unanswered]
+      @incorrect += @unanswered
       @attempts_value.each do |attempt_details|
         question_id = attempt_details[0]
         attempted_answer = attempt_details[1]
